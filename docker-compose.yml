@@ -1,0 +1,49 @@
+services:
+  springapp:
+    image: jdk17:latest
+    container_name: spring
+    ports:
+      - 8080:8080
+  #   build: "./app-server"
+  #   container_name: "nodeapp"
+  #   working_dir: "/usr/src/app"
+    volumes:
+      - "$PWD/instagram/src:/usr/src/app"
+    depends_on:
+      - mariadb
+      - mongodb
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    volumes:
+      - ./db/mariadb/conf.d:/etc/mysql/conf.d
+      - ./db/mariadb/data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      TZ: Asia/Seoul
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+    networks:
+      - docker
+    restart: always
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - ./db/mongodb:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - docker
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=1234
+      - MONGO_INITDB_DATABASE=mydb
+    restart: always
+
+networks:
+  docker:
+    driver: bridge
