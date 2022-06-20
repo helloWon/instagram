@@ -1,12 +1,17 @@
 spring:
-  datasource:
-    url: jdbc:mariadb://127.0.0.1:3306/instadb
-    driver-class-name: org.mariadb.jdbc.Driver
-    username: insta
-    password: 1234
-  jpa:
-    open-in-view: false
-    generate-ddl: true
-    show-sql: true
-    hibernate:
-      ddl-auto: create
+    datasource:
+        url: jdbc:mariadb://127.0.0.1:3306/instadb
+        driver-class-name: org.mariadb.jdbc.Driver
+        username: sa
+        password: 12345678
+    jpa:
+        open-in-view: false
+        generate-ddl: true
+        show-sql: true
+        hibernate:
+            ddl-auto: create
+logging:
+    level:
+        org.hibernate.SQL: debug
+        #   org.apache.coyote.http11: debug
+        #   org.hibernate.type: trace

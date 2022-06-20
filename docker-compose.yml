@@ -1,54 +1,50 @@
 services:
-  # springapp:
-  #   image: jdk17:latest
-  #   container_name: spring
-  #   ports:
-  #     - 8080:8080
-  # #   build: "./app-server"
-  # #   container_name: "nodeapp"
-  # #   working_dir: "/usr/src/app"
-  #   volumes:
-  #     - "$PWD/instagram/src:/usr/src/app"
-  #   depends_on:
-  #     - mariadb
-  #     - mongodb
+    # springapp:
+    #   image: jdk17:latest
+    #   container_name: spring
+    #   ports:
+    #     - 8080:8080
+    # #   build: "./app-server"
+    # #   container_name: "nodeapp"
+    # #   working_dir: "/usr/src/app"
+    #   volumes:
+    #     - "$PWD/instagram/src:/usr/src/app"
+    #   depends_on:
+    #     - mariadb
+    #     - mongodb
 
-  mariadb:
-    image: mariadb:latest
-    container_name: mariadb
-    volumes:
-      - ./db/mariadb/conf.d:/etc/mysql/conf.d
-      - ./db/mariadb/data:/var/lib/mysql
-    ports:
-      - 3306:3306
-    environment:
-      TZ: Asia/Seoul
-    environment:
-      - MYSQL_ROOT_PASSWORD=1234
-      - MYSQL_DATABASE=instadb
-      - MYSQL_USER=insta
-      - MYSQL_PASSWORD=1234
-    network_mode: host
-    # networks:
-    #   - host
-    restart: always
+    mariadb:
+        image: mariadb
+        container_name: database
+        ports:
+            - 3306:3306
+        volumes:
+            - ./db/mariadb/initdb.d/:/docker-entrypoint-initdb.d
+            - ./db/mariadb/conf.d:/etc/mysql/conf.d
+            - ./db/mariadb/data:/var/lib/mysql
+        env_file:
+            - ./db/.env
+        environment:
+            TX: Asia/Seoul
+        restart: always
+        network_mode: host
+    
+    mongodb:
+        image: mongo:latest
+        container_name: mongodb
+        volumes:
+            - ./db/mongodb:/data/db
+        ports:
+            - 27017:27017
+        # networks:
+        #   - docker
+        network_mode: host
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=1234
+            - MONGO_INITDB_DATABASE=mydb
+        restart: always
 
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb
-    volumes:
-      - ./db/mongodb:/data/db
-    ports:
-      - 27017:27017
-    # networks:
-    #   - docker
-    network_mode: host
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=1234
-      - MONGO_INITDB_DATABASE=mydb
-    restart: always
-
-networks: 
-  docker:
-    driver: bridge
+networks:
+    docker:
+        driver: bridge
