@@ -1,0 +1,77 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Insta Clone Project</title>
+    </head>
+    <body>
+        Welcome to instagram!
+        <ul>
+            <li>
+                로그인 & 회원가입
+                <ul>
+                    <li><a href="/join/login">로그인</a></li>
+                    <li><a href="/join/signup">회원가입</a></li>
+                </ul>
+            </li>
+        </ul>
+    </body>
+</html> -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet" />
+    <title>Insta Clone Project</title>
+</head>
+
+<body>
+    <div class="container" style="max-width: 600px">
+        <div class="py-5 text-center">
+            <h2>Welcome to Instagram!</h2>
+        </div>
+
+        <div class="row">
+            <div class="col" style="padding-right: 0px">
+                <button class="btn btn-success float-end" onclick="location.href='/user/login'" type="button">
+                    Login
+                </button>
+            </div>
+            <div class="col" style="max-width: 100px; padding-left: 0px">
+                <button class="btn btn-success float-end" onclick="location.href='/user/join'" type="button">
+                    Sign Up
+                </button>
+            </div>
+        </div>
+
+        <hr class="my-4" />
+        <div>
+            <!-- <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>사진과</th>
+                        <th>피드는</th>
+                        <th>아직</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${items}">
+                        <td>
+                            <a href="item.html" th:href="@{/form/items/{itemId}(itemId=${item.id})}"
+                                th:text="${item.id}">사용자ID</a>
+                        </td>
+                        <td>
+                            <a href="item.html" th:href="@{|/form/items/${item.id}|}" th:text="${item.itemName}">사진</a>
+                        </td>
+                        <td th:text="${item.price}">좋아요</td>
+                        <td th:text="${item.quantity}">댓글</td>
+                    </tr>
+                </tbody>
+            </table> -->
+        </div>
+    </div>
+    <!-- /container -->
+</body>
+
+</html>
