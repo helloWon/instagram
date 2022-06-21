@@ -29,6 +29,7 @@
     <div class="container" style="max-width: 600px">
         <div class="py-5 text-center">
             <h2>Welcome to Instagram!</h2>
+            <td th:if="${param.name}" th:text="|안녕, ${param.name} !|"></td>
         </div>
         <div class="row">
             <div class="col" style="padding-right: 0px">
