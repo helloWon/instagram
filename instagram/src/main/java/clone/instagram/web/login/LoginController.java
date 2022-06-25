@@ -42,13 +42,10 @@ public class LoginController {
         Member loginMember = loginService.login(form.getLoginId(),
                 form.getPassword());
 
-        log.info("login member = {}", loginMember);
-        System.out.println(loginMember.getEmail());
-
-        // if (loginMember == null) {
-        // bindingResult.reject("loginFail", "id 또는 비밀번호 오류");
-        // return "user/login";
-        // }
+        if (loginMember == null) {
+            bindingResult.reject("loginFail", "id 또는 비밀번호 오류");
+            return "../error";
+        }
 
         Cookie idCookie = new Cookie("memberId",
                 String.valueOf(loginMember.getId()));
