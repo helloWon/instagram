@@ -19,7 +19,7 @@ public class Member {
     private Long id;
 
     @NotEmpty
-    @Column(length = 20)
+    @Column(name = "login_id", length = 20)
     private String loginId;
 
     @NotEmpty
@@ -31,12 +31,13 @@ public class Member {
     private String password;
 
     // FIXME: phoneNum or email 둘 중 하나 필수
-    @Column(length = 20)
+    @Column(name = "phone_num", length = 20)
     private String phoneNum;
 
     @Column(length = 50)
     private String email;
 
+    @Column(name = "profile_img_id")
     private int profileImgId;
 
     @Column(length = 150)
